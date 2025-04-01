@@ -1,3 +1,7 @@
+<div align="center">
+    <img src="assets/logo.png" alt="GitHub Repo Duplicator" width="50%">
+</div>
+
 # GitHub Repo Duplicator
 
 A tool that allows users to duplicate GitHub repositories with an interactive menu. This tool is designed for easily creating new projects from template repositories.
@@ -5,11 +9,13 @@ A tool that allows users to duplicate GitHub repositories with an interactive me
 ## ⚡ Quick Start
 
 ### For Users
+
 Simply download the `github_repo_duplicator` executable from the `dist` folder of this repository to the directory where you want to clone a template. Then double-click on it or run it from the terminal. The tool will guide you through the process.
 
 > **Note:** Once releases are published, you'll be able to download the executable directly from the Releases section.
 
 ### For Developers
+
 If you want to modify the list of template repositories, edit the `get_default_repositories` function in `src/github_repo_duplicator/duplicator.py`:
 
 ```python
@@ -43,17 +49,18 @@ Replace these with your actual template repositories.
 ### Option 2: Install as a Python package
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git
    cd GitHub_Repo_Duplicator_for_Templates
    ```
-
 2. Install the package:
+
    ```bash
    pip install -e .
    ```
-
 3. Run the command:
+
    ```bash
    github-repo-duplicator
    ```
@@ -61,17 +68,18 @@ Replace these with your actual template repositories.
 ### Option 3: Run from source
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git
    cd GitHub_Repo_Duplicator_for_Templates
    ```
-
 2. Make sure you have Python 3.6+ installed:
+
    ```bash
    python --version
    ```
-
 3. Run the script:
+
    ```bash
    python scripts/run.py
    ```
@@ -79,11 +87,12 @@ Replace these with your actual template repositories.
 ### Option 4: Use the installation scripts
 
 1. For Linux/macOS users:
+
    ```bash
    bash scripts/install.sh
    ```
-
 2. For Windows users:
+
    ```powershell
    .\scripts\install.ps1
    ```
@@ -91,33 +100,34 @@ Replace these with your actual template repositories.
 ### Option 5: Build your own executable
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git
    cd GitHub_Repo_Duplicator_for_Templates
    ```
-
 2. Use Make to build the executable:
+
    ```bash
    make build
    ```
-
 3. Find the executable in the `dist` folder
 
 ### Option 6: Set up with Conda
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git
    cd GitHub_Repo_Duplicator_for_Templates
    ```
-
 2. Set up a conda environment:
+
    ```bash
    make conda-setup
    conda activate duplicator
    ```
-
 3. Run the application:
+
    ```bash
    python scripts/run.py
    ```
@@ -219,8 +229,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-If you have any questions, feel free to open an issue or contact the maintainer directly.
-
----
-
-Made with ❤️ by Mostafa Rezaee
+If you have any questions or suggestions, feel free to reach out to [Mostafa Rezaee](https://www.linkedin.com/in/mostafa-rezaee/) at Linkedin. You can also open an issue on the project repository.
