@@ -1,0 +1,13 @@
+# Core dependencies
+# No external Python packages required for the base functionality
+
+# For building the executable
+pyinstaller>=5.6.2
+pillow>=9.0.0  # For icon creation
+
+# For testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Optional dependencies
+# GitHub CLI is not a Python package but is recommended for improved functionality 
