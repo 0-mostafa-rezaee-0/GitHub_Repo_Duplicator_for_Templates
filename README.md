@@ -8,91 +8,91 @@ A tool that allows users to duplicate GitHub repositories with an interactive me
 
 ## Table of Contents 
 <details>
-  <summary><a href="#-quick-start"><i><b>1. Quick Start</b></i></a></summary>
+  <summary><a href="#1-quick-start"><i><b>1. Quick Start</b></i></a></summary>
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prerequisites">1.1. Prerequisites</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#for-users">1.2. For Users</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#for-developers">1.3. For Developers</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-prerequisites">1.1. Prerequisites</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-for-users">1.2. For Users</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-for-developers">1.3. For Developers</a><br>
   </div>
 </details>
 &nbsp;
 
 <details>
-  <summary><a href="#-features"><i><b>2. Features</b></i></a></summary>
+  <summary><a href="#2-features"><i><b>2. Features</b></i></a></summary>
 </details>
 &nbsp;
 
 <details>
-  <summary><a href="#-installation"><i><b>3. Installation</b></i></a></summary>
+  <summary><a href="#3-installation"><i><b>3. Installation</b></i></a></summary>
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-1-download-the-executable-recommended">3.1. Download the executable</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-2-install-as-a-python-package">3.2. Install as a Python package</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-3-run-from-source">3.3. Run from source</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-4-use-the-installation-scripts">3.4. Use the installation scripts</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-5-build-your-own-executable">3.5. Build your own executable</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-6-set-up-with-conda">3.6. Set up with Conda</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-download-the-executable-recommended">3.1. Download the executable</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-install-as-a-python-package">3.2. Install as a Python package</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-run-from-source">3.3. Run from source</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-use-the-installation-scripts">3.4. Use the installation scripts</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-build-your-own-executable">3.5. Build your own executable</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#36-set-up-with-conda">3.6. Set up with Conda</a><br>
   </div>
 </details>
 &nbsp;
 
 <div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-usage"><i><b>4. Usage</b></i></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-usage"><i><b>4. Usage</b></i></a>
 </div>
 &nbsp;
 
 <div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-configuration"><i><b>5. Configuration</b></i></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#5-configuration"><i><b>5. Configuration</b></i></a>
 </div>
 &nbsp;
 
 <div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-requirements"><i><b>6. Requirements</b></i></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#6-requirements"><i><b>6. Requirements</b></i></a>
 </div>
 &nbsp;
 
 <div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-testing"><i><b>7. Testing</b></i></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#7-testing"><i><b>7. Testing</b></i></a>
 </div>
 &nbsp;
 
 <div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-project-structure"><i><b>8. Project Structure</b></i></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#8-project-structure"><i><b>8. Project Structure</b></i></a>
 </div>
 &nbsp;
 
 <details>
-  <summary><a href="#-documentation"><i><b>9. Documentation</b></i></a></summary>
+  <summary><a href="#9-documentation"><i><b>9. Documentation</b></i></a></summary>
   <div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#documentation-structure">9.1. Documentation Structure</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#documentation-benefits">9.2. Documentation Benefits</a><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#developer-documentation">9.3. Developer Documentation</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#91-documentation-structure">9.1. Documentation Structure</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#92-documentation-benefits">9.2. Documentation Benefits</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#93-developer-documentation">9.3. Developer Documentation</a><br>
   </div>
 </details>
 &nbsp;
 
 <div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-contributing"><i><b>10. Contributing</b></i></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#10-contributing"><i><b>10. Contributing</b></i></a>
 </div>
 &nbsp;
 
 <div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-license"><i><b>11. License</b></i></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-license"><i><b>11. License</b></i></a>
 </div>
 &nbsp;
 
 <div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-changelog"><i><b>12. Changelog</b></i></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-changelog"><i><b>12. Changelog</b></i></a>
 </div>
 &nbsp;
 
 <div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-contact"><i><b>13. Contact</b></i></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-contact"><i><b>13. Contact</b></i></a>
 </div>
 &nbsp;
 
-## ⚡ Quick Start
+## 1. Quick Start
 
-### Prerequisites
+### 1.1. Prerequisites
 
 - **GitHub CLI**: This tool requires GitHub CLI (gh) for authentication and repository creation
   ```bash
@@ -112,9 +112,9 @@ A tool that allows users to duplicate GitHub repositories with an interactive me
   ```
   Follow the prompts to authenticate through your browser.
 
-### For Users
+### 1.2. For Users
 
-#### Recommended: Install as a Python Package
+#### 1.2.1. Recommended: Install as a Python Package
 ```bash
 # Clone the repository
 git clone https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git
@@ -129,7 +129,7 @@ pip install -e .
 github-repo-duplicator
 ```
 
-#### Alternative: Run from Source
+#### 1.2.2. Alternative: Run from Source
 ```bash
 # Clone the repository
 git clone https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git
@@ -138,7 +138,7 @@ git clone https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templ
 python3 GitHub_Repo_Duplicator_for_Templates/scripts/run.py
 ```
 
-### For Developers
+### 1.3. For Developers
 If you want to modify the list of template repositories, edit the `get_default_repositories` function in `src/github_repo_duplicator/duplicator.py`:
 
 ```python
@@ -152,7 +152,7 @@ def get_default_repositories() -> List[str]:
 
 Replace these with your actual template repositories.
 
-## 📋 Features
+## 2. Features
 
 - Interactive menu to select template repositories
 - Automatically creates a new GitHub repository
@@ -161,15 +161,15 @@ Replace these with your actual template repositories.
 - Supports both Zsh and Bash shells
 - Integration with GitHub CLI for enhanced functionality (if available)
 
-## 🚀 Installation
+## 3. Installation
 
-### Option 1: Download the executable (Recommended)
+### 3.1. Download the executable (Recommended)
 
 1. Download the executable `github_repo_duplicator` (or `github_repo_duplicator.exe` on Windows) from the `dist` folder of this repository
 2. Move the executable to a directory of your choice
 3. Double-click to run, or execute from terminal
 
-### Option 2: Install as a Python package
+### 3.2. Install as a Python package
 
 1. Clone this repository:
 
@@ -188,7 +188,7 @@ Replace these with your actual template repositories.
    github-repo-duplicator
    ```
 
-### Option 3: Run from source
+### 3.3. Run from source
 
 1. Clone this repository:
 
@@ -207,7 +207,7 @@ Replace these with your actual template repositories.
    python scripts/run.py
    ```
 
-### Option 4: Use the installation scripts
+### 3.4. Use the installation scripts
 
 1. For Linux/macOS users:
 
@@ -220,7 +220,7 @@ Replace these with your actual template repositories.
    .\scripts\install.ps1
    ```
 
-### Option 5: Build your own executable
+### 3.5. Build your own executable
 
 1. Clone this repository:
 
@@ -235,7 +235,7 @@ Replace these with your actual template repositories.
    ```
 3. Find the executable in the `dist` folder
 
-### Option 6: Set up with Conda
+### 3.6. Set up with Conda
 
 1. Clone this repository:
 
@@ -255,7 +255,7 @@ Replace these with your actual template repositories.
    python scripts/run.py
    ```
 
-## 📝 Usage
+## 4. Usage
 
 1. Run the executable or script
 2. Select a template repository from the list
@@ -263,7 +263,7 @@ Replace these with your actual template repositories.
 4. Wait for the process to complete
 5. Your new repository will be cloned to the current directory
 
-## ⚙️ Configuration
+## 5. Configuration
 
 To customize the list of template repositories, edit the `get_default_repositories` function in the `src/github_repo_duplicator/duplicator.py` file:
 
@@ -276,7 +276,7 @@ def get_default_repositories() -> List[str]:
     ]
 ```
 
-## 📋 Requirements
+## 6. Requirements
 
 - Python 3.6 or higher (if running from source)
 - Git installed and configured on your system
@@ -284,7 +284,7 @@ def get_default_repositories() -> List[str]:
 - Either Bash or Zsh shell available
 - GitHub CLI (optional, provides enhanced functionality)
 
-## 🧪 Testing
+## 7. Testing
 
 Ensure everything is working by running:
 
@@ -292,7 +292,7 @@ Ensure everything is working by running:
 make test
 ```
 
-## 📁 Project Structure
+## 8. Project Structure
 
 ```
 +----.github                        <-- GitHub configuration files
@@ -360,11 +360,11 @@ make test
 |    setup.py                       <-- Package setup script
 ```
 
-## 📚 Documentation
+## 9. Documentation
 
 This project follows a comprehensive documentation approach with README files in every directory. This makes it easy for new contributors to understand the purpose and contents of each part of the project.
 
-### Documentation Structure
+### 9.1. Documentation Structure
 
 - **Root README**: This file - provides an overview of the entire project
 - **Directory READMEs**: Each directory contains its own README.md explaining:
@@ -373,21 +373,21 @@ This project follows a comprehensive documentation approach with README files in
   - Usage instructions if applicable
   - Special notes about the directory
 
-### Documentation Benefits
+### 9.2. Documentation Benefits
 
 - **Easy Navigation**: Quickly understand any part of the project
 - **Self-Contained Context**: Each directory explains itself without needing to read the entire project docs
 - **Improved Onboarding**: New contributors can easily understand the codebase organization
 - **Maintainability**: Better organization leads to more maintainable code
 
-### Developer Documentation
+### 9.3. Developer Documentation
 
 For detailed information on developing and contributing to this project, see:
 
 - [DEVELOPER.md](docs/DEVELOPER.md): Comprehensive development guide
 - [CHANGELOG.md](CHANGELOG.md): Version history and changes
 
-## 🤝 Contributing
+## 10. Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -399,17 +399,17 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 For more detailed information for developers, see [DEVELOPER.md](docs/DEVELOPER.md).
 
-## 📜 License
+## 11. License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🔄 Changelog
+## 12. Changelog
 
 - **v1.0.0** - Initial release
   - Base functionality for repository duplication
   - Support for Zsh and Bash shells
   - GitHub CLI integration
 
-## 📞 Contact
+## 13. Contact
 
 If you have any questions or suggestions, feel free to reach out to [Mostafa Rezaee](https://www.linkedin.com/in/mostafa-rezaee/) at Linkedin. You can also open an issue on the project repository.
