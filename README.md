@@ -8,14 +8,53 @@ A tool that allows users to duplicate GitHub repositories with an interactive me
 
 ## ⚡ Quick Start
 
+### Prerequisites
+
+- **GitHub CLI**: This tool requires GitHub CLI (gh) for authentication and repository creation
+  ```bash
+  # Install on Ubuntu/Debian
+  sudo apt install gh
+  
+  # Install on macOS
+  brew install gh
+  
+  # Install on Windows
+  # Download from: https://github.com/cli/cli/releases/latest
+  ```
+  
+- **Authenticate with GitHub CLI**:
+  ```bash
+  gh auth login
+  ```
+  Follow the prompts to authenticate through your browser.
+
 ### For Users
 
-Simply download the `github_repo_duplicator` executable from the `dist` folder of this repository to the directory where you want to clone a template. Then double-click on it or run it from the terminal. The tool will guide you through the process.
+#### Recommended: Install as a Python Package
+```bash
+# Clone the repository
+git clone https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git
 
-> **Note:** Once releases are published, you'll be able to download the executable directly from the Releases section.
+# Change to the project directory
+cd GitHub_Repo_Duplicator_for_Templates
+
+# Install the package
+pip install -e .
+
+# Run from anywhere
+github-repo-duplicator
+```
+
+#### Alternative: Run from Source
+```bash
+# Clone the repository
+git clone https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git
+
+# Run the script
+python3 GitHub_Repo_Duplicator_for_Templates/scripts/run.py
+```
 
 ### For Developers
-
 If you want to modify the list of template repositories, edit the `get_default_repositories` function in `src/github_repo_duplicator/duplicator.py`:
 
 ```python
@@ -172,37 +211,97 @@ make test
 ## 📁 Project Structure
 
 ```
-GitHub_Repo_Duplicator_for_Templates/
-├── src/                         # Source code
-│   └── github_repo_duplicator/  # Main package
-│       ├── __init__.py          # Package initialization
-│       ├── duplicator.py        # Core functionality
-│       ├── create_icon.py       # Icon generation script
-│       └── ascii_icon.txt       # ASCII art fallback icon
-├── tests/                       # Test directory
-│   ├── __init__.py              # Test package initialization
-│   └── test_duplicator.py       # Unit tests
-├── scripts/                     # Helper scripts
-│   ├── github_repo_duplicator_cli.py # CLI entry point
-│   ├── install.sh               # Linux/macOS installation script
-│   ├── install.ps1              # Windows installation script
-│   ├── setup_conda.sh           # Conda environment setup
-│   └── run.py                   # Simple runner script
-├── docs/                        # Documentation
-│   ├── DEVELOPER.md             # Developer documentation
-│   └── img/                     # Documentation images
-├── environment/                 # Environment configuration
-│   └── environment.yml          # Conda environment specification
-├── build/                       # Build-related files
-│   ├── MANIFEST.in              # Package manifest
-│   └── pyinstaller/             # PyInstaller configuration
-│       └── github_repo_duplicator.spec # PyInstaller spec file
-├── setup.py                     # Package setup script
-├── requirements.txt             # Development dependencies
-├── Makefile                     # Development automation
-├── README.md                    # User documentation
-└── LICENSE                      # MIT License
++----.github                        <-- GitHub configuration files
+|
+|    README.md                      <-- GitHub configuration documentation
+|
+|    +----ISSUE_TEMPLATE            <-- GitHub issue templates
+|         README.md                 <-- Issue templates documentation
+|
+|    +----workflows                 <-- GitHub Actions workflows
+|         README.md                 <-- Workflows documentation
+|         python-tests.yml          <-- Test automation
+|         release.yml               <-- Release automation
+|
++----assets                         <-- Project assets (images, styles)
+|    README.md                      <-- Assets documentation
+|    logo.png                       <-- Project logo
+|
++----docs                           <-- Documentation files
+|    README.md                      <-- Documentation overview
+|    DEVELOPER.md                   <-- Developer documentation
+|
+|    +----.github                   <-- Documentation GitHub templates
+|         README.md                 <-- Doc GitHub templates info
+|
+|    +----img                       <-- Documentation images
+|         README.md                 <-- Image guidelines
+|
++----environment                    <-- Environment configuration
+|    README.md                      <-- Environment documentation
+|    environment.yml                <-- Conda environment specification
+|
++----scripts                        <-- Utility scripts
+|    README.md                      <-- Scripts documentation
+|    run.py                         <-- Simple runner script
+|    github_repo_duplicator_cli.py  <-- CLI entry point
+|    install.sh                     <-- Linux/macOS installation script
+|    install.ps1                    <-- Windows installation script
+|    setup_conda.sh                 <-- Conda environment setup
+|
++----src                            <-- Source code
+|    README.md                      <-- Source code documentation
+|
+|    +----github_repo_duplicator    <-- Main package
+|         README.md                 <-- Package documentation
+|         __init__.py               <-- Package initialization
+|         cli.py                    <-- Command-line interface
+|         duplicator.py             <-- Core functionality
+|         create_icon.py            <-- Icon generation script
+|         ascii_icon.txt            <-- ASCII art fallback icon
+|
++----tests                          <-- Test directory
+|    README.md                      <-- Testing documentation
+|    __init__.py                    <-- Test package initialization
+|    test_duplicator.py             <-- Unit tests
+|
+|    .gitignore                     <-- Specifies files to ignore in Git
+|    CHANGELOG.md                   <-- Version history
+|    LICENSE                        <-- License information
+|    Makefile                       <-- Development automation
+|    MANIFEST.in                    <-- Package manifest
+|    pyproject.toml                 <-- Project configuration (PEP 518)
+|    README.md                      <-- This file
+|    requirements.txt               <-- Development dependencies
+|    setup.py                       <-- Package setup script
 ```
+
+## 📚 Documentation
+
+This project follows a comprehensive documentation approach with README files in every directory. This makes it easy for new contributors to understand the purpose and contents of each part of the project.
+
+### Documentation Structure
+
+- **Root README**: This file - provides an overview of the entire project
+- **Directory READMEs**: Each directory contains its own README.md explaining:
+  - Purpose of the directory
+  - Contents and their functions
+  - Usage instructions if applicable
+  - Special notes about the directory
+
+### Documentation Benefits
+
+- **Easy Navigation**: Quickly understand any part of the project
+- **Self-Contained Context**: Each directory explains itself without needing to read the entire project docs
+- **Improved Onboarding**: New contributors can easily understand the codebase organization
+- **Maintainability**: Better organization leads to more maintainable code
+
+### Developer Documentation
+
+For detailed information on developing and contributing to this project, see:
+
+- [DEVELOPER.md](docs/DEVELOPER.md): Comprehensive development guide
+- [CHANGELOG.md](CHANGELOG.md): Version history and changes
 
 ## 🤝 Contributing
 
