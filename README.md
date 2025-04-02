@@ -17,9 +17,9 @@ A tool that allows users to duplicate GitHub repositories with an interactive me
 </details>
 &nbsp;
 
-<details>
-  <summary><a href="#2-features"><i><b>2. Features</b></i></a></summary>
-</details>
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-features"><i><b>2. Features</b></i></a>
+</div>
 &nbsp;
 
 <details>
