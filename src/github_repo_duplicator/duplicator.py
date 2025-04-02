@@ -23,6 +23,36 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# ANSI color codes for terminal output
+class Colors:
+    HEADER = '\033[95m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
+def print_success(message: str) -> None:
+    """Print a success message in green color."""
+    print(f"{Colors.GREEN}{message}{Colors.END}")
+
+def print_error(message: str) -> None:
+    """Print an error message in red color."""
+    print(f"{Colors.RED}{Colors.BOLD}Error: {message}{Colors.END}")
+
+def print_warning(message: str) -> None:
+    """Print a warning message in yellow color."""
+    print(f"{Colors.YELLOW}Warning: {message}{Colors.END}")
+
+def print_info(message: str) -> None:
+    """Print an info message in blue color."""
+    print(f"{Colors.BLUE}{message}{Colors.END}")
+
+def print_header(message: str) -> None:
+    """Print a header message in purple and bold."""
+    print(f"{Colors.HEADER}{Colors.BOLD}{message}{Colors.END}")
 
 def execute_command(command: str, shell_cmd: str) -> bool:
     """
@@ -51,6 +81,23 @@ def execute_command(command: str, shell_cmd: str) -> bool:
     except subprocess.CalledProcessError as e:
         logger.error(f"Command failed: {e}")
         logger.error(f"Error output: {e.stderr}")
+        
+        # Extract more specific error messages for common failures
+        if "permission denied" in e.stderr.lower():
+            print_error("Permission denied. Please check your file permissions.")
+        elif "not found" in e.stderr.lower():
+            print_error("Command or file not found. Please check your environment.")
+        elif "could not read from remote repository" in e.stderr.lower():
+            print_error("Could not access the remote repository. Please check your authentication and connectivity.")
+        elif "fatal: remote origin already exists" in e.stderr.lower():
+            print_error("Remote 'origin' already exists. Previous operation may have partially succeeded.")
+        else:
+            print_error(f"Command execution failed: {e.stderr.strip()}")
+        
+        return False
+    except Exception as e:
+        logger.exception("An unexpected error occurred")
+        print_error(f"An unexpected error occurred: {str(e)}")
         return False
 
 
@@ -191,7 +238,7 @@ def check_gh_cli() -> bool:
         # Check if installation was successful
         gh_available = shutil.which("gh") is not None
         if gh_available:
-            print("GitHub CLI installed successfully!")
+            print_success("GitHub CLI installed successfully!")
             
             # Run GitHub authentication
             print("\nNow setting up GitHub authentication. This will open a browser window.")
@@ -208,13 +255,13 @@ def check_gh_cli() -> bool:
                 text=True
             )
             if auth_result.returncode == 0:
-                print("GitHub CLI authentication successful!")
+                print_success("GitHub CLI authentication successful!")
                 return True
             else:
-                print("GitHub CLI authentication failed. Please run 'gh auth login' manually.")
+                print_error("GitHub CLI authentication failed. Please run 'gh auth login' manually.")
                 return False
         else:
-            print("Failed to install GitHub CLI. Please install it manually.")
+            print_error("Failed to install GitHub CLI. Please install it manually.")
             return False
             
     except Exception as e:
@@ -223,34 +270,23 @@ def check_gh_cli() -> bool:
         return False
 
 
-def check_gh_auth() -> bool:
-    """
-    Check if the user is authenticated with GitHub CLI.
-    
-    Returns:
-        True if the user is authenticated, False otherwise.
-    """
+def check_github_cli_installed() -> bool:
+    """Check if GitHub CLI is installed."""
+    return shutil.which('gh') is not None
+
+
+def check_github_authenticated() -> bool:
+    """Check if the user is authenticated with GitHub CLI."""
     try:
-        # Try to get the authenticated user
         result = subprocess.run(
-            "gh auth status",
-            shell=True,
-            capture_output=True,
-            text=True
+            ['gh', 'auth', 'status'], 
+            capture_output=True, 
+            text=True,
+            check=False
         )
-        
-        if result.returncode == 0:
-            logger.info("User is authenticated with GitHub CLI")
-            return True
-        else:
-            print("\nYou need to authenticate with GitHub CLI.")
-            print("Please run: gh auth login")
-            print("Then run this tool again.")
-            logger.error("User is not authenticated with GitHub CLI")
-            return False
+        return result.returncode == 0
     except Exception as e:
-        logger.error(f"Error checking GitHub authentication: {str(e)}")
-        print(f"\nFailed to check GitHub authentication: {str(e)}")
+        logger.error(f"Error checking GitHub CLI authentication: {str(e)}")
         return False
 
 
@@ -351,97 +387,143 @@ def get_default_repositories() -> List[str]:
     ]
 
 
-def main():
+def main(template_url: Optional[str] = None, new_repo_name: Optional[str] = None, skip_confirmations: bool = False) -> None:
     """
     Main function to run the GitHub Repo Duplicator.
     
-    This function displays a menu of template repositories,
-    gets user input for selection and new repo name,
-    and then duplicates the selected repository.
+    Args:
+        template_url: Optional pre-selected template URL to skip selection
+        new_repo_name: Optional pre-defined new repository name to skip prompt
+        skip_confirmations: Whether to skip confirmation prompts
     """
-    # Make sure GitHub CLI is installed and authenticated
-    gh_available = check_gh_cli()
-    if not gh_available:
-        print("\nGitHub CLI is required for this tool to work.")
-        print("Please install GitHub CLI and run the tool again.")
-        sys.exit(1)
+    print_header("\nGitHub Repository Duplicator for Templates")
     
-    # Make sure the user is authenticated
-    is_authenticated = check_gh_auth()
-    if not is_authenticated:
-        print("\nPlease authenticate with GitHub CLI by running 'gh auth login'")
-        print("Then run this tool again.")
+    # Check for GitHub CLI and authenticate if needed
+    if not check_github_cli_installed():
+        if not check_gh_cli():
+            print_error("GitHub CLI is required but could not be installed")
+            print_info("Please install GitHub CLI manually: https://cli.github.com/")
+            sys.exit(1)
+    
+    if not check_github_authenticated():
+        print_warning("You are not authenticated with GitHub CLI")
+        print_info("Please authenticate with GitHub")
+        subprocess.run("gh auth login -w", shell=True)
+        
+        # Verify authentication was successful
+        if not check_github_authenticated():
+            print_error("GitHub authentication failed")
+            sys.exit(1)
+    
+    # Get available repository templates
+    templates = get_default_repositories()
+    
+    # Let user select a template if not provided
+    if not template_url:
+        print_info("\nAvailable template repositories:")
+        for i, repo in enumerate(templates, 1):
+            print(f"{i}. {repo}")
+            
+        while True:
+            try:
+                choice = input("\nSelect a template repository (1-{}): ".format(len(templates)))
+                index = int(choice) - 1
+                if 0 <= index < len(templates):
+                    template_url = templates[index]
+                    break
+                else:
+                    print_warning(f"Invalid selection. Please enter a number between 1 and {len(templates)}")
+            except ValueError:
+                print_warning("Please enter a valid number")
+    
+    # Get new repository name if not provided
+    if not new_repo_name:
+        while True:
+            new_repo_name = input("\nEnter a name for your new repository: ").strip()
+            if validate_repo_name(new_repo_name):
+                break
+            else:
+                print_warning("Invalid repository name. Use only letters, numbers, hyphens, underscores, and periods")
+    
+    # Show summary and confirm
+    if not skip_confirmations:
+        print("\nRepository Duplication Details:")
+        print_info(f"Template repository: {template_url}")
+        print_info(f"New repository name: {new_repo_name}")
+        
+        confirmation = input("\nContinue with these settings? (y/n): ").lower()
+        if confirmation != 'y':
+            print_warning("Operation cancelled by user")
+            sys.exit(0)
+    
+    # Determine which shell to use
+    shell_cmd = "/bin/bash"
+    if platform.system() == "Windows":
+        shell_cmd = "cmd.exe"
+    
+    # Create temp directory for cloning
+    temp_dir = f"{new_repo_name}_temp"
+    if os.path.exists(temp_dir):
+        print_warning(f"Directory {temp_dir} already exists. Removing it...")
+        shutil.rmtree(temp_dir)
+    
+    try:
+        # Clone the template repository
+        print_info(f"\nCloning template repository: {template_url}")
+        if not execute_command(f"git clone {template_url} {temp_dir}", shell_cmd):
+            print_error("Failed to clone the template repository")
+            sys.exit(1)
+        
+        # Create a new repository on GitHub
+        print_info(f"\nCreating new repository: {new_repo_name}")
+        if not execute_command(f"gh repo create {new_repo_name} --private --confirm", shell_cmd):
+            print_error("Failed to create the new repository")
+            sys.exit(1)
+        
+        # Set up the new repository and push
+        print_info("\nSetting up the new repository")
+        commands = [
+            f"cd {temp_dir}",
+            "git remote remove origin",
+            f"git remote add origin $(gh repo view {new_repo_name} --json sshUrl -q .sshUrl)",
+            "git push -u origin main || git push -u origin master"
+        ]
+        
+        if not execute_command(" && ".join(commands), shell_cmd):
+            print_error("Failed to push to the new repository")
+            sys.exit(1)
+            
+        # Clean up
+        print_info("\nCleaning up temporary files")
+        shutil.rmtree(temp_dir)
+        
+        # Show success message
+        repo_url = subprocess.check_output(
+            f"gh repo view {new_repo_name} --json url -q .url",
+            shell=True, text=True
+        ).strip()
+        
+        print_success(f"\n✅ Repository successfully duplicated!")
+        print_info(f"New repository: {repo_url}")
+        print_info(f"You can clone it with: git clone {repo_url}.git")
+        
+    except KeyboardInterrupt:
+        print_warning("\nOperation cancelled by user")
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir)
         sys.exit(1)
         
-    # Get the list of original repositories (templates)
-    original_repos = get_default_repositories()
-
-    # Display header
-    print("\n" + "=" * 50)
-    print("GitHub Repo Duplicator for Templates".center(50))
-    print("=" * 50 + "\n")
-
-    # Display the menu
-    print("Select the template repository to duplicate:")
-    for i, repo in enumerate(original_repos, 1):
-        print(f"{i}. {repo}")
-
-    # Get the user's choice
-    try:
-        choice = int(input("\nEnter the number of the template repository: ")) - 1
-        if choice < 0 or choice >= len(original_repos):
-            logger.error("Invalid choice selected")
-            print("Invalid choice. Exiting.")
-            return
-    except ValueError:
-        logger.error("Invalid input for repository selection")
-        print("Invalid input. Please enter a number. Exiting.")
-        return
-
-    # Get the new repository name
-    new_repo = input("Enter the new repository name: ")
-    if not validate_repo_name(new_repo):
-        logger.error(f"Invalid repository name: {new_repo}")
-        print("Invalid repository name. Repository names should only contain letters, numbers, underscores, dots, and hyphens.")
-        return
-
-    # Check if Zsh is available, otherwise use Bash
-    shell_cmd = shutil.which("zsh") or shutil.which("bash")
-    if not shell_cmd:
-        logger.error("Neither zsh nor bash is available")
-        print("Error: Neither zsh nor bash is available on your system. Exiting.")
-        return
-
-    # Selected original repo
-    original_repo = original_repos[choice]
-    
-    # Duplicate the repository
-    success = duplicate_repository(
-        original_repo,
-        new_repo,
-        shell_cmd
-    )
-    
-    if success:
-        print("\n" + "=" * 50)
-        print("Repository Duplication Completed Successfully!".center(50))
-        print(f"Your new repository '{new_repo}' is ready to use.".center(50))
-        print("=" * 50 + "\n")
-    else:
-        print("\nError: Repository duplication failed. Please check the logs for details.")
+    except Exception as e:
+        print_error(f"An unexpected error occurred: {str(e)}")
+        logger.exception("Detailed error information:")
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir)
+        sys.exit(1)
 
 
 def cli_entry_point():
-    """Entry point for the command-line interface."""
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\nOperation cancelled by user. Exiting.")
-        sys.exit(1)
-    except Exception as e:
-        logger.exception("An unexpected error occurred")
-        print(f"\nAn unexpected error occurred: {str(e)}")
-        sys.exit(1)
+    """Entry point for the command-line script."""
+    main()
 
 
 if __name__ == "__main__":
