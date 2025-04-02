@@ -11,19 +11,21 @@ from typing import List, Optional
 
 from . import __version__
 from .duplicator import (
-    check_github_cli_installed,
+    Colors,
     check_github_authenticated,
-    get_default_repositories,
+    check_github_cli_installed,
     clone_repository,
     create_new_repository,
-    push_to_new_repository,
-    main as duplicator_main,
+    get_default_repositories,
+)
+from .duplicator import main as duplicator_main
+from .duplicator import (
+    print_error,
     print_header,
     print_info,
     print_success,
-    print_error,
     print_warning,
-    Colors
+    push_to_new_repository,
 )
 
 
@@ -44,50 +46,39 @@ def parse_args() -> argparse.Namespace:
     )
 
     parser.add_argument(
-        "--version", 
-        action="version", 
-        version=f"%(prog)s {__version__}"
+        "--version", action="version", version=f"%(prog)s {__version__}"
     )
-    
+
     parser.add_argument(
-        "-v", 
-        "--verbose", 
-        action="store_true", 
-        help="Enable verbose output"
+        "-v", "--verbose", action="store_true", help="Enable verbose output"
     )
-    
+
     parser.add_argument(
-        "-l", 
-        "--list-templates", 
-        action="store_true", 
-        help="List available template repositories and exit"
+        "-l",
+        "--list-templates",
+        action="store_true",
+        help="List available template repositories and exit",
     )
-    
+
     parser.add_argument(
-        "-t", 
-        "--template", 
+        "-t",
+        "--template",
         type=str,
-        help="Template repository URL to use (skips template selection)"
+        help="Template repository URL to use (skips template selection)",
     )
-    
+
     parser.add_argument(
-        "-n", 
-        "--name", 
-        type=str,
-        help="Name for the new repository (skips name prompt)"
+        "-n", "--name", type=str, help="Name for the new repository (skips name prompt)"
     )
-    
+
     parser.add_argument(
-        "-y", 
-        "--yes", 
-        action="store_true", 
-        help="Skip all confirmation prompts"
+        "-y", "--yes", action="store_true", help="Skip all confirmation prompts"
     )
-    
+
     parser.add_argument(
-        "--check", 
-        action="store_true", 
-        help="Check GitHub CLI installation and authentication"
+        "--check",
+        action="store_true",
+        help="Check GitHub CLI installation and authentication",
     )
 
     return parser.parse_args()
@@ -104,21 +95,21 @@ def list_templates_and_exit() -> None:
 def check_environment_and_exit() -> None:
     """Check GitHub CLI installation and authentication status and exit."""
     print_header("Environment Check")
-    
+
     if check_github_cli_installed():
         print_success("✓ GitHub CLI is installed")
     else:
         print_error("✗ GitHub CLI is not installed")
         print_info("Please install GitHub CLI: https://cli.github.com/")
         sys.exit(1)
-        
+
     if check_github_authenticated():
         print_success("✓ GitHub CLI is authenticated")
     else:
         print_error("✗ GitHub CLI is not authenticated")
         print_info("Please run 'gh auth login' to authenticate")
         sys.exit(1)
-        
+
     print_success("Environment is ready for GitHub Repo Duplicator")
     sys.exit(0)
 
@@ -127,19 +118,19 @@ def main() -> None:
     """Main entry point for the CLI."""
     args = parse_args()
     setup_logging(args.verbose)
-    
+
     if args.check:
         check_environment_and_exit()
-        
+
     if args.list_templates:
         list_templates_and_exit()
-    
+
     # Run the main program with CLI arguments
     try:
         duplicator_main(
             template_url=args.template,
             new_repo_name=args.name,
-            skip_confirmations=args.yes
+            skip_confirmations=args.yes,
         )
     except KeyboardInterrupt:
         print_warning("\nOperation cancelled by user")
@@ -152,4 +143,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main() 
+    main()
