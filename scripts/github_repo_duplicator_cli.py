@@ -10,7 +10,7 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Import and run the main function
-from src.github_repo_duplicator.duplicator import cli_entry_point
+from src.github_repo_duplicator.cli import main
 
 if __name__ == "__main__":
-    cli_entry_point() 
+    main() 

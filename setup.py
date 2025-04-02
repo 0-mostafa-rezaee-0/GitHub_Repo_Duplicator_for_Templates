@@ -4,19 +4,20 @@ Setup script for GitHub Repo Duplicator.
 """
 
 import os
+import re
 from setuptools import setup, find_packages
 
 # Read the README.md file
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-# Use the MANIFEST.in file from the build directory
-manifest_dir = os.path.join(os.path.dirname(__file__), 'build')
-os.environ['PYTHONPATH'] = manifest_dir + os.pathsep + os.environ.get('PYTHONPATH', '')
+# Get version from __init__.py
+with open("src/github_repo_duplicator/__init__.py", encoding="utf-8") as f:
+    version = re.search(r'__version__ = ["\']([^"\']+)["\']', f.read()).group(1)
 
 setup(
     name="github-repo-duplicator",
-    version="1.0.0",
+    version=version,
     author="Mostafa Rezaee",
     author_email="0.mostafa.rezaee.0@gmail.com",
     description="A tool to duplicate GitHub repositories with an interactive menu",
@@ -31,6 +32,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Environment :: Console",
@@ -39,7 +41,7 @@ setup(
     python_requires=">=3.6",
     entry_points={
         "console_scripts": [
-            "github-repo-duplicator=github_repo_duplicator.duplicator:cli_entry_point",
+            "github-repo-duplicator=github_repo_duplicator.cli:main",
         ],
     },
     include_package_data=True,

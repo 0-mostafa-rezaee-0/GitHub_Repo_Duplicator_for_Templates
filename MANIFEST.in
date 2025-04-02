@@ -1,0 +1,18 @@
+include LICENSE
+include README.md
+include CHANGELOG.md
+include requirements.txt
+include Makefile
+include environment/environment.yml
+
+recursive-include docs *
+recursive-include scripts *.py *.sh *.ps1
+recursive-include tests *.py
+recursive-include src *.py *.txt *.ico *.png
+recursive-include .github/workflows *.yml
+
+prune dist
+prune build
+prune *.egg-info
+prune __pycache__
+prune .pytest_cache 
