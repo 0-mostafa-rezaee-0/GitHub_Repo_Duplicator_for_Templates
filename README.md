@@ -6,6 +6,90 @@
 
 A tool that allows users to duplicate GitHub repositories with an interactive menu. This tool is designed for easily creating new projects from template repositories.
 
+## Table of Contents 
+<details>
+  <summary><a href="#-quick-start"><i><b>1. Quick Start</b></i></a></summary>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prerequisites">1.1. Prerequisites</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#for-users">1.2. For Users</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#for-developers">1.3. For Developers</a><br>
+  </div>
+</details>
+&nbsp;
+
+<details>
+  <summary><a href="#-features"><i><b>2. Features</b></i></a></summary>
+</details>
+&nbsp;
+
+<details>
+  <summary><a href="#-installation"><i><b>3. Installation</b></i></a></summary>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-1-download-the-executable-recommended">3.1. Download the executable</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-2-install-as-a-python-package">3.2. Install as a Python package</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-3-run-from-source">3.3. Run from source</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-4-use-the-installation-scripts">3.4. Use the installation scripts</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-5-build-your-own-executable">3.5. Build your own executable</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#option-6-set-up-with-conda">3.6. Set up with Conda</a><br>
+  </div>
+</details>
+&nbsp;
+
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-usage"><i><b>4. Usage</b></i></a>
+</div>
+&nbsp;
+
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-configuration"><i><b>5. Configuration</b></i></a>
+</div>
+&nbsp;
+
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-requirements"><i><b>6. Requirements</b></i></a>
+</div>
+&nbsp;
+
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-testing"><i><b>7. Testing</b></i></a>
+</div>
+&nbsp;
+
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-project-structure"><i><b>8. Project Structure</b></i></a>
+</div>
+&nbsp;
+
+<details>
+  <summary><a href="#-documentation"><i><b>9. Documentation</b></i></a></summary>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#documentation-structure">9.1. Documentation Structure</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#documentation-benefits">9.2. Documentation Benefits</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#developer-documentation">9.3. Developer Documentation</a><br>
+  </div>
+</details>
+&nbsp;
+
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-contributing"><i><b>10. Contributing</b></i></a>
+</div>
+&nbsp;
+
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-license"><i><b>11. License</b></i></a>
+</div>
+&nbsp;
+
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-changelog"><i><b>12. Changelog</b></i></a>
+</div>
+&nbsp;
+
+<div>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-contact"><i><b>13. Contact</b></i></a>
+</div>
+&nbsp;
+
 ## ⚡ Quick Start
 
 ### Prerequisites
