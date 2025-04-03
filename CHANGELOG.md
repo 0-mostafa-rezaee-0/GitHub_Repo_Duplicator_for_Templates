@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New template: Docker for Data Science Projects
 - Enhanced template descriptions in README
 - New "Available Templates" section with detailed information
+- Automatic repository cloning after duplication
 
 ### Changed
 - Updated documentation with clearer installation instructions
