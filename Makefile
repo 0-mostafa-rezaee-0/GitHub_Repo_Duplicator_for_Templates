@@ -43,7 +43,7 @@ generate-icon:
 
 # Build the executable using PyInstaller (with icon)
 build: generate-icon
-	$(PYTHON) -m PyInstaller --onefile --name $(APP_NAME) --icon=$(ICON_PATH) $(MAIN_SCRIPT)
+	$(PYTHON) -m PyInstaller --onefile --name $(APP_NAME) --icon=$(ICON_PATH) --add-binary="/usr/lib/x86_64-linux-gnu/libpython3.10.so.1.0:." $(MAIN_SCRIPT)
 
 # Build using spec file if it exists
 build-with-spec: generate-icon
