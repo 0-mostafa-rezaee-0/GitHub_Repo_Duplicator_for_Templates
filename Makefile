@@ -7,7 +7,7 @@ PIP = pip3
 # Variables
 APP_NAME = github_repo_duplicator
 MAIN_SCRIPT = scripts/run.py
-VERSION = 1.2.3
+VERSION = 1.2.4
 SPEC_FILE = build/pyinstaller/github_repo_duplicator.spec
 ICON_PATH = build/pyinstaller/icon.ico
 

@@ -384,26 +384,47 @@ def duplicate_repository(original_repo: str, new_repo: str, shell_cmd: str) -> b
         print_success(f"\n✅ Repository successfully duplicated!")
         print_info(f"New repository: https://github.com/{username}/{new_repo}")
         
-        # Clone the repository using GitHub CLI if possible
-        has_token = subprocess.run(
-            "gh auth status 2>/dev/null | grep -q 'Token'",
+        # Automatically clone the new repository
+        clone_url = f"{remote_url}.git"
+        print_info(f"Cloning the new repository to your current directory...")
+        
+        # Check if GitHub CLI is available and authenticated
+        gh_available = subprocess.run(
+            "which gh >/dev/null 2>&1",
             shell=True,
             executable=shell_cmd
         ).returncode == 0
         
-        print_info(f"Cloning the new repository to your current directory...")
-        
-        if has_token:
-            # Use GitHub CLI for cloning which uses the token
-            clone_cmd = f"gh repo clone {username}/{new_repo}"
+        if gh_available:
+            # Always try GitHub CLI first if it's available
+            print_info("Using GitHub CLI for cloning...")
+            clone_cmd = f"gh repo clone {new_repo}"
             if execute_command(clone_cmd, shell_cmd):
                 print_success(f"Repository successfully cloned to {new_repo}/")
             else:
-                print_warning(f"Could not automatically clone the repository.")
-                print_info(f"You can clone it manually with: git clone {clone_url}")
+                print_warning(f"Could not clone with GitHub CLI. Trying direct git clone...")
+                
+                # Set up credential helper for git
+                print_info("Setting up credential storage...")
+                execute_command("git config --global credential.helper store", shell_cmd)
+                
+                if execute_command(f"git clone {clone_url}", shell_cmd):
+                    print_success(f"Repository successfully cloned to {new_repo}/")
+                else:
+                    print_warning(f"Could not automatically clone the repository.")
+                    print_info(f"You can clone it manually with: git clone {clone_url}")
+                    print_info(f"Or use GitHub CLI: gh repo clone {new_repo}")
+                    
+                    # Show authentication help
+                    print_info("\nTip: To avoid authentication issues, you can:")
+                    print_info("1. Use GitHub CLI: run 'gh auth login'")
+                    print_info("2. Set up an SSH key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh")
+                    print_info("3. Use a personal access token with git credential helper")
         else:
-            # Try direct git clone, which might prompt for credentials
-            print_info("No GitHub token detected. You may be prompted for credentials.")
+            # Fallback to git clone if GitHub CLI is not available
+            print_info("GitHub CLI not detected. Using git clone...")
+            print_info("Note: GitHub no longer accepts password authentication. Use a Personal Access Token.")
+            
             # Ask if user wants to store credentials
             store_creds = input("\nStore GitHub credentials to avoid future prompts? (y/n): ").lower().strip() == 'y'
             
@@ -418,13 +439,12 @@ def duplicate_repository(original_repo: str, new_repo: str, shell_cmd: str) -> b
             else:
                 print_warning(f"Could not automatically clone the repository.")
                 print_info(f"You can clone it manually with: git clone {clone_url}")
-                print_info(f"Or use GitHub CLI: gh repo clone {new_repo}")
                 
-                # Suggest setting up a personal access token
-                print_info("\nTip: To avoid password prompts, you can:")
-                print_info("1. Use GitHub CLI: run 'gh auth login'")
-                print_info("2. Set up an SSH key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh")
-                print_info("3. Use a personal access token with git credential helper")
+                # Suggest GitHub CLI
+                print_info("\nTip: To avoid authentication issues, we recommend:")
+                print_info("1. Install GitHub CLI: https://cli.github.com/")
+                print_info("2. Authenticate with: gh auth login")
+                print_info("3. Clone with: gh repo clone {new_repo}")
     
     return success
 
@@ -578,24 +598,43 @@ def main(
         clone_url = f"{repo_url}.git"
         print_info(f"Cloning the new repository to your current directory...")
         
-        # Check if GitHub CLI is authenticated and has a token
-        has_token = subprocess.run(
-            "gh auth status 2>/dev/null | grep -q 'Token'",
+        # Check if GitHub CLI is available and authenticated
+        gh_available = subprocess.run(
+            "which gh >/dev/null 2>&1",
             shell=True,
             executable=shell_cmd
         ).returncode == 0
         
-        if has_token:
-            # Use GitHub CLI for cloning which uses the token
+        if gh_available:
+            # Always try GitHub CLI first if it's available
+            print_info("Using GitHub CLI for cloning...")
             clone_cmd = f"gh repo clone {new_repo_name}"
             if execute_command(clone_cmd, shell_cmd):
                 print_success(f"Repository successfully cloned to {new_repo_name}/")
             else:
-                print_warning(f"Could not automatically clone the repository.")
-                print_info(f"You can clone it manually with: git clone {clone_url}")
+                print_warning(f"Could not clone with GitHub CLI. Trying direct git clone...")
+                
+                # Set up credential helper for git
+                print_info("Setting up credential storage...")
+                execute_command("git config --global credential.helper store", shell_cmd)
+                
+                if execute_command(f"git clone {clone_url}", shell_cmd):
+                    print_success(f"Repository successfully cloned to {new_repo_name}/")
+                else:
+                    print_warning(f"Could not automatically clone the repository.")
+                    print_info(f"You can clone it manually with: git clone {clone_url}")
+                    print_info(f"Or use GitHub CLI: gh repo clone {new_repo_name}")
+                    
+                    # Show authentication help
+                    print_info("\nTip: To avoid authentication issues, you can:")
+                    print_info("1. Use GitHub CLI: run 'gh auth login'")
+                    print_info("2. Set up an SSH key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh")
+                    print_info("3. Use a personal access token with git credential helper")
         else:
-            # Try direct git clone, which might prompt for credentials
-            print_info("No GitHub token detected. You may be prompted for credentials.")
+            # Fallback to git clone if GitHub CLI is not available
+            print_info("GitHub CLI not detected. Using git clone...")
+            print_info("Note: GitHub no longer accepts password authentication. Use a Personal Access Token.")
+            
             # Ask if user wants to store credentials
             store_creds = input("\nStore GitHub credentials to avoid future prompts? (y/n): ").lower().strip() == 'y'
             
@@ -610,13 +649,12 @@ def main(
             else:
                 print_warning(f"Could not automatically clone the repository.")
                 print_info(f"You can clone it manually with: git clone {clone_url}")
-                print_info(f"Or use GitHub CLI: gh repo clone {new_repo_name}")
                 
-                # Suggest setting up a personal access token
-                print_info("\nTip: To avoid password prompts, you can:")
-                print_info("1. Use GitHub CLI: run 'gh auth login'")
-                print_info("2. Set up an SSH key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh")
-                print_info("3. Use a personal access token with git credential helper")
+                # Suggest GitHub CLI
+                print_info("\nTip: To avoid authentication issues, we recommend:")
+                print_info("1. Install GitHub CLI: https://cli.github.com/")
+                print_info("2. Authenticate with: gh auth login")
+                print_info("3. Clone with: gh repo clone {new_repo_name}")
 
     except KeyboardInterrupt:
         print_warning("\nOperation cancelled by user")
