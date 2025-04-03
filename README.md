@@ -84,23 +84,37 @@ A tool that allows users to duplicate GitHub repositories with an interactive me
 
 - **GitHub CLI**: This tool requires GitHub CLI (gh) for authentication and repository creation
 
+  GitHub CLI is the official command-line tool maintained by GitHub. It's recommended as the most secure and convenient way to interact with GitHub repositories.
+  
+  **Install GitHub CLI:**
+
   ```bash
-  # Install on Ubuntu/Debian
+  # For Ubuntu/Debian
   sudo apt install gh
-
-  # Install on macOS
+  ```
+  
+  ```bash
+  # For macOS with Homebrew
   brew install gh
-
-  # Install on Windows
+  ```
+  
+  ```bash
+  # For Windows
   # Download from: https://github.com/cli/cli/releases/latest
   ```
+  
+  ```bash
+  # For other Linux distributions
+  # See: https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+  ```
+
 - **Authenticate with GitHub CLI**:
 
   ```bash
   gh auth login
   ```
 
-  Follow the prompts to authenticate through your browser.
+  This will guide you through a secure OAuth-based authentication process. GitHub CLI uses secure authentication methods that don't require you to manually handle tokens or passwords.
 
 ### 1.2. For Users
 
@@ -215,19 +229,31 @@ def get_default_repositories() -> List[str]:
 
 ### 1.4. Available Templates
 
-1. **GitHub Repo Duplicator for Templates**: This template itself - allows you to create your own template duplicator.
+1. **GitHub Repo Duplicator for Templates**: 
+   - This template itself - allows you to create your own template duplicator
+   - Secure authentication via GitHub CLI
+   - Interactive CLI for easy template selection
 
-2. **Docker for Data Science Projects**: A Docker-based alternative to Conda/venv for data science projects.
+2. **Docker for Data Science Projects**: 
+   - A Docker-based alternative to Conda/venv for data science projects
    - Uses Docker for reproducible development environments
    - Includes Dockerfile and docker-compose.yml configuration
    - Pre-configured directory structure (data, notebooks, scripts, figures)
    - Perfect for teams that prefer containerization over traditional virtual environments
 
-3. **ML API with FastAPI and Docker**: Create machine learning APIs with FastAPI framework.
+3. **ML API with FastAPI and Docker**: 
+   - Create machine learning APIs with FastAPI framework
+   - Docker containerization for deployment
+   - Production-ready project structure
+   - Includes testing and documentation setup
 
-4. **ML API with PostgreSQL Integration**: Build ML APIs with database integration.
+4. **ML API with PostgreSQL Integration**: 
+   - Build ML APIs with database integration
+   - PostgreSQL database configuration
+   - Sample models and database migration scripts
+   - Includes testing with database fixtures
 
-You can add your own template repositories to the list or modify the existing ones.
+You can add your own template repositories to the list by modifying the `get_default_repositories` function as shown in the Developers section.
 
 ## 2. Features
 
@@ -243,6 +269,23 @@ You can add your own template repositories to the list or modify the existing on
 - Integration with GitHub CLI for enhanced functionality (if available)
 
 ## 3. Installation
+
+### 3.0. Authentication and Security
+
+This tool uses GitHub CLI for authentication, which provides several security benefits:
+
+- **OAuth-based Authentication**: Uses secure browser-based OAuth flow rather than password authentication
+- **No Password Storage**: Never stores your GitHub password
+- **Token Management**: Securely manages access tokens so you don't have to
+- **Automatic Expiry**: Handles token expiration and refresh automatically
+- **Official Tool**: Developed and maintained by GitHub, following security best practices
+
+For the most secure experience, we recommend:
+1. Install GitHub CLI as shown in the Prerequisites section
+2. Authenticate with `gh auth login`
+3. Use this tool with GitHub CLI authentication
+
+**Note**: GitHub no longer accepts password authentication for API access. Using GitHub CLI is the most user-friendly solution for secure authentication.
 
 ### 3.1. Download the executable (Recommended for All Users)
 
