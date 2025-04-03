@@ -380,7 +380,14 @@ def duplicate_repository(original_repo: str, new_repo: str, shell_cmd: str) -> b
     """
 
     # Execute the script
-    return execute_command(script, shell_cmd)
+    success = execute_command(script, shell_cmd)
+    
+    if success:
+        print_success(f"\n✅ Repository successfully duplicated!")
+        print_info(f"New repository: https://github.com/{username}/{new_repo}")
+        print_success(f"Repository successfully cloned to {new_repo}/")
+    
+    return success
 
 
 def get_default_repositories() -> List[str]:
@@ -527,7 +534,15 @@ def main(
 
         print_success(f"\n✅ Repository successfully duplicated!")
         print_info(f"New repository: {repo_url}")
-        print_info(f"You can clone it with: git clone {repo_url}.git")
+        
+        # Automatically clone the new repository
+        clone_url = f"{repo_url}.git"
+        print_info(f"Cloning the new repository to your current directory...")
+        if execute_command(f"git clone {clone_url}", shell_cmd):
+            print_success(f"Repository successfully cloned to {new_repo_name}/")
+        else:
+            print_warning(f"Could not automatically clone the repository.")
+            print_info(f"You can clone it manually with: git clone {clone_url}")
 
     except KeyboardInterrupt:
         print_warning("\nOperation cancelled by user")
