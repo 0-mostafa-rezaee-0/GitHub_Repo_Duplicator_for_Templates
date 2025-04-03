@@ -374,9 +374,7 @@ def duplicate_repository(original_repo: str, new_repo: str, shell_cmd: str) -> b
     git push -u origin main || git push -u origin master || git push -u origin $(git branch --show-current) &&
     # Clean up
     cd .. &&
-    rm -rf {tmp_dir} &&
-    # Clone the new repository
-    git clone {clone_url}
+    rm -rf {tmp_dir}
     """
 
     # Execute the script
@@ -385,7 +383,32 @@ def duplicate_repository(original_repo: str, new_repo: str, shell_cmd: str) -> b
     if success:
         print_success(f"\n✅ Repository successfully duplicated!")
         print_info(f"New repository: https://github.com/{username}/{new_repo}")
-        print_success(f"Repository successfully cloned to {new_repo}/")
+        
+        # Clone the repository using GitHub CLI if possible
+        has_token = subprocess.run(
+            "gh auth status 2>/dev/null | grep -q 'Token'",
+            shell=True,
+            executable=shell_cmd
+        ).returncode == 0
+        
+        print_info(f"Cloning the new repository to your current directory...")
+        
+        if has_token:
+            # Use GitHub CLI for cloning which uses the token
+            clone_cmd = f"gh repo clone {username}/{new_repo}"
+            if execute_command(clone_cmd, shell_cmd):
+                print_success(f"Repository successfully cloned to {new_repo}/")
+            else:
+                print_warning(f"Could not automatically clone the repository.")
+                print_info(f"You can clone it manually with: git clone {clone_url}")
+        else:
+            # Try direct git clone, which might prompt for credentials
+            print_info("No GitHub token detected. You may be prompted for credentials.")
+            if execute_command(f"git clone {clone_url}", shell_cmd):
+                print_success(f"Repository successfully cloned to {new_repo}/")
+            else:
+                print_warning(f"Could not automatically clone the repository.")
+                print_info(f"You can clone it manually with: git clone {clone_url}")
     
     return success
 
@@ -538,11 +561,31 @@ def main(
         # Automatically clone the new repository
         clone_url = f"{repo_url}.git"
         print_info(f"Cloning the new repository to your current directory...")
-        if execute_command(f"git clone {clone_url}", shell_cmd):
-            print_success(f"Repository successfully cloned to {new_repo_name}/")
+        
+        # Check if GitHub CLI is authenticated and has a token
+        has_token = subprocess.run(
+            "gh auth status 2>/dev/null | grep -q 'Token'",
+            shell=True,
+            executable=shell_cmd
+        ).returncode == 0
+        
+        if has_token:
+            # Use GitHub CLI for cloning which will use the token
+            clone_cmd = f"gh repo clone {new_repo_name}"
+            if execute_command(clone_cmd, shell_cmd):
+                print_success(f"Repository successfully cloned to {new_repo_name}/")
+            else:
+                print_warning(f"Could not automatically clone the repository.")
+                print_info(f"You can clone it manually with: git clone {clone_url}")
         else:
-            print_warning(f"Could not automatically clone the repository.")
-            print_info(f"You can clone it manually with: git clone {clone_url}")
+            # Try direct git clone, which might prompt for credentials
+            print_info("No GitHub token detected. You may be prompted for credentials.")
+            if execute_command(f"git clone {clone_url}", shell_cmd):
+                print_success(f"Repository successfully cloned to {new_repo_name}/")
+            else:
+                print_warning(f"Could not automatically clone the repository.")
+                print_info(f"You can clone it manually with: git clone {clone_url}")
+                print_info(f"Or use GitHub CLI: gh repo clone {new_repo_name}")
 
     except KeyboardInterrupt:
         print_warning("\nOperation cancelled by user")

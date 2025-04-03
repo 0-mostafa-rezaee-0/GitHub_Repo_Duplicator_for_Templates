@@ -5,7 +5,7 @@ This package provides a simple way to create a new GitHub repository
 based on an existing template repository.
 """
 
-__version__ = "1.2.1"
+__version__ = "1.2.2"
 __author__ = "Mostafa Rezaee"
 __license__ = "MIT"
 
