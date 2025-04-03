@@ -7,7 +7,7 @@ PIP = pip3
 # Variables
 APP_NAME = github_repo_duplicator
 MAIN_SCRIPT = scripts/run.py
-VERSION = 1.0.0
+VERSION = 1.2.0
 SPEC_FILE = build/pyinstaller/github_repo_duplicator.spec
 ICON_PATH = build/pyinstaller/icon.ico
 
@@ -98,7 +98,7 @@ release: clean test build
 	mkdir -p release/$(APP_NAME)-$(VERSION)
 	cp -r dist/$(APP_NAME)* release/$(APP_NAME)-$(VERSION)/
 	cp README.md LICENSE release/$(APP_NAME)-$(VERSION)/
-	cp scripts/install.sh scripts/install.ps1 release/$(APP_NAME)-$(VERSION)/
+	cp scripts/install.sh scripts/install.ps1 scripts/install_standalone.sh release/$(APP_NAME)-$(VERSION)/
 	cd release && zip -r $(APP_NAME)-$(VERSION).zip $(APP_NAME)-$(VERSION)
 	@echo "Release package created at release/$(APP_NAME)-$(VERSION).zip"
 

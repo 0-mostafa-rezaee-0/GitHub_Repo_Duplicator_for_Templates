@@ -392,6 +392,7 @@ def get_default_repositories() -> List[str]:
     """
     return [
         "https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git",
+        "https://github.com/0-mostafa-rezaee-0/Docker_for_Data_Science_Projects.git",
         "https://github.com/0-mostafa-rezaee-0/ML_API_with_FastAPI_and_Docker.git",
         "https://github.com/0-mostafa-rezaee-0/ML_API_with_PostgreSQL_Integration.git",
     ]

@@ -93,6 +93,9 @@ class TestDuplicator(unittest.TestCase):
 
         # Verify each string is a valid GitHub URL
         self.assertTrue(all(duplicator.validate_github_url(repo) for repo in repos))
+        
+        # Verify there are exactly 4 repositories after adding Docker for Data Science Projects
+        self.assertEqual(len(repos), 4, "Expected 4 template repositories")
 
 
 if __name__ == "__main__":
