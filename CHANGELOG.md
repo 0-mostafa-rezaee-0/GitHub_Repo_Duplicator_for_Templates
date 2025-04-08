@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.6] - 2025-04-05
+
+### Added
+- Five new template repositories:
+  - GitHub Profile template (0-Mostafa-Rezaee-0)
+  - Resume CV ATS-Friendly template
+  - Batch LLM Inference with Ray Data
+  - Second Harmonic Generation (SHG) scientific template
+  - FORTRAN Tutorial template
+
+### Changed
+- Expanded template selection to offer more diverse project types
+- Updated documentation to reflect new template options
+
 ## [1.2.5] - 2025-04-04
 
 ### Added

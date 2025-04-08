@@ -463,10 +463,15 @@ def get_default_repositories() -> List[str]:
         A list of repository URLs.
     """
     return [
+        "https://github.com/0-mostafa-rezaee-0/0-Mostafa-Rezaee-0.git",
+        "https://github.com/0-mostafa-rezaee-0/Resume_CV_ATS-Friendly.git",
         "https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git",
         "https://github.com/0-mostafa-rezaee-0/Docker_for_Data_Science_Projects.git",
         "https://github.com/0-mostafa-rezaee-0/ML_API_with_FastAPI_and_Docker.git",
         "https://github.com/0-mostafa-rezaee-0/ML_API_with_PostgreSQL_Integration.git",
+        "https://github.com/0-mostafa-rezaee-0/Batch_LLM_Inference_with_Ray_Data_LLM.git",
+        "https://github.com/0-mostafa-rezaee-0/SHG__Second_Harmonic_Generation.git",
+        "https://github.com/0-mostafa-rezaee-0/FORTRAN_Tutorial.git"
     ]
 
 

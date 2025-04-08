@@ -220,48 +220,88 @@ If you want to modify the list of template repositories, edit the `get_default_r
 ```python
 def get_default_repositories() -> List[str]:
     return [
+        "https://github.com/0-mostafa-rezaee-0/0-Mostafa-Rezaee-0.git",
+        "https://github.com/0-mostafa-rezaee-0/Resume_CV_ATS-Friendly.git",
         "https://github.com/0-mostafa-rezaee-0/GitHub_Repo_Duplicator_for_Templates.git",
         "https://github.com/0-mostafa-rezaee-0/Docker_for_Data_Science_Projects.git",
         "https://github.com/0-mostafa-rezaee-0/ML_API_with_FastAPI_and_Docker.git",
-        "https://github.com/0-mostafa-rezaee-0/ML_API_with_PostgreSQL_Integration.git"
+        "https://github.com/0-mostafa-rezaee-0/ML_API_with_PostgreSQL_Integration.git",
+        "https://github.com/0-mostafa-rezaee-0/Batch_LLM_Inference_with_Ray_Data_LLM.git",
+        "https://github.com/0-mostafa-rezaee-0/SHG__Second_Harmonic_Generation.git",
+        "https://github.com/0-mostafa-rezaee-0/FORTRAN_Tutorial.git"
     ]
 ```
 
 ### 1.4. Available Templates
 
-1. **GitHub Repo Duplicator for Templates**: 
+1. **GitHub Profile Template**: 
+   - Professional GitHub profile README template with skills table
+   - Customizable sections for your experience and projects
+   - Well-organized layout with modern formatting
+   - Perfect for showcasing your technical expertise
+
+2. **Resume CV ATS-Friendly**: 
+   - ATS-optimized resume template for technical roles
+   - Modern and clean design that passes automated screening
+   - Includes font strategy recommendations
+   - Detailed guidance for tech industry applications
+
+3. **GitHub Repo Duplicator for Templates**: 
    - This template itself - allows you to create your own template duplicator
    - Secure authentication via GitHub CLI
    - Interactive CLI for easy template selection
 
-2. **Docker for Data Science Projects**: 
+4. **Docker for Data Science Projects**: 
    - A Docker-based alternative to Conda/venv for data science projects
    - Uses Docker for reproducible development environments
    - Includes Dockerfile and docker-compose.yml configuration
    - Pre-configured directory structure (data, notebooks, scripts, figures)
    - Perfect for teams that prefer containerization over traditional virtual environments
 
-3. **ML API with FastAPI and Docker**: 
+5. **ML API with FastAPI and Docker**: 
    - Create machine learning APIs with FastAPI framework
    - Docker containerization for deployment
    - Production-ready project structure
    - Includes testing and documentation setup
 
-4. **ML API with PostgreSQL Integration**: 
+6. **ML API with PostgreSQL Integration**: 
    - Build ML APIs with database integration
    - PostgreSQL database configuration
    - Sample models and database migration scripts
    - Includes testing with database fixtures
+
+7. **Batch LLM Inference with Ray Data**: 
+   - Framework for processing large datasets with LLMs
+   - Parallel processing with Ray framework
+   - Scalable architecture for batch inference
+   - Optimized for performance with large language models
+
+8. **Second Harmonic Generation (SHG)**: 
+   - Scientific computing template for optical research
+   - Simulation tools for nonlinear optics
+   - Visualization components for research output
+   - Academic-focused project structure
+
+9. **FORTRAN Tutorial**: 
+   - Educational template for FORTRAN programming
+   - Step-by-step examples and exercises
+   - Scientific computing focus
+   - Legacy code integration techniques
 
 You can add your own template repositories to the list by modifying the `get_default_repositories` function as shown in the Developers section.
 
 ## 2. Features
 
 - Interactive menu to select template repositories:
-  - **GitHub Repo Duplicator**: This template itself - for creating more template duplicators
-  - **Docker for Data Science Projects**: A Docker-based alternative to Conda/venv for data science workflows
+  - **GitHub Profile Template**: Professional GitHub profile README with skills table
+  - **Resume CV ATS-Friendly**: Resume template optimized for applicant tracking systems
+  - **GitHub Repo Duplicator**: This template itself - for creating template duplicators
+  - **Docker for Data Science Projects**: A Docker-based alternative to Conda/venv
   - **ML API with FastAPI and Docker**: Template for creating ML APIs with FastAPI
   - **ML API with PostgreSQL Integration**: Template for ML APIs with database integration
+  - **Batch LLM Inference with Ray Data**: Framework for processing data with LLMs
+  - **Second Harmonic Generation (SHG)**: Scientific template for optical research
+  - **FORTRAN Tutorial**: Educational template for FORTRAN programming
 - Automatically creates a new GitHub repository
 - Clones the new repository to your current directory
 - Cross-platform support (Windows, macOS, Linux)
