@@ -93,7 +93,7 @@ class TestDuplicator(unittest.TestCase):
 
         # Verify each string is a valid GitHub URL
         self.assertTrue(all(duplicator.validate_github_url(repo) for repo in repos))
-        
+
         # Verify there are exactly 9 repositories
         self.assertEqual(len(repos), 9, "Expected 9 template repositories")
 
